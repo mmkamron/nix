@@ -39,10 +39,10 @@ let name = "Kamron Mirsamatov";
         identitiesOnly = true;
         identityFile = [
           (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
-            "/home/${user}/.ssh/id_ed25519"
+            "/home/${user}/.ssh/github"
           )
           (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-            "/Users/${user}/.ssh/id_ed25519"
+            "/Users/${user}/.ssh/github"
           )
         ];
       };
