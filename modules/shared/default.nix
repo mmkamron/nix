@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   nixpkgs = {
@@ -17,4 +17,5 @@
                       pathExists (path + ("/" + n + "/default.nix")))
                   (attrNames (readDir path)));
   };
+
 }

@@ -13,10 +13,15 @@ with pkgs; [
   openssh
   zip
   neovim
+  kanata
 
   nerd-fonts.jetbrains-mono
 
   xclip
   unrar
   unzip
+  yt-dlp
+  firefox
+  newsboat
+  tailscale
 ]

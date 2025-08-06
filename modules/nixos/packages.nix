@@ -12,4 +12,8 @@ shared-packages ++ [
   networkmanagerapplet
   wofi
   rmpc
+  mpd
+  mpv
+  mpvScripts.uosc
+  telegram-desktop
 ]

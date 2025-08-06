@@ -29,19 +29,46 @@ in {
       enable = true;
       enableCompletion = true;
     };
-    hyprland = {
+    sway = {
       enable = true;
       xwayland.enable = true;
+      extraPackages = with pkgs; [i3status-rust wmenu wl-clipboard swaybg];
     };
+    waybar = {
+      enable = true;
+    };
+  };
+
+  #https://nixos.wiki/wiki/MPD
+  systemd.services.mpd.environment = {
+    XDG_RUNTIME_DIR = "/run/user/${toString config.users.users."mmkamron".uid}";
   };
 
   services = {
     openssh.enable = true;
+    mpd = {
+      user = "mmkamron";
+      enable = true;
+      musicDirectory = "/home/mmkamron/music";
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "My PipeWire Output"
+        }
+      '';
+    };
     pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+    };
+    kanata = {
+      enable = true;
+      keyboards.main.configFile = "/etc/nixos/x380.kbd";
+    };
+    tailscale = {
+      enable = true;
     };
   };
 
