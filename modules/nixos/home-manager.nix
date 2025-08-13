@@ -16,5 +16,20 @@ in
     stateVersion = "25.05";
   };
 
+  services = {
+    mpd = {
+      enable = true;
+      musicDirectory = "/home/mmkamron/music";
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "My PipeWire Output"
+        }
+      '';
+      network.listenAddress = "any";
+      network.startWhenNeeded = true;
+    };
+  };
+
   programs = shared-programs // {};
 }

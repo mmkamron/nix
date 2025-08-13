@@ -40,23 +40,26 @@ in {
   };
 
   #https://nixos.wiki/wiki/MPD
-  systemd.services.mpd.environment = {
-    XDG_RUNTIME_DIR = "/run/user/${toString config.users.users."mmkamron".uid}";
+  # systemd.services.mpd.environment = {
+  #   XDG_RUNTIME_DIR = "/run/user/${toString config.users.users."mmkamron".uid}";
+  # };
+  systemd.services."getty@tty1" = {
+    overrideStrategy = "asDropin";
+    serviceConfig.ExecStart = ["" "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${config.services.getty.loginProgram} --autologin mmkamron --noclear --keep-baud %I 115200,38400,9600 $TERM"];
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
   };
 
   services = {
     openssh.enable = true;
-    mpd = {
-      user = "mmkamron";
-      enable = true;
-      musicDirectory = "/home/mmkamron/music";
-      extraConfig = ''
-        audio_output {
-          type "pipewire"
-          name "My PipeWire Output"
-        }
-      '';
-    };
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -65,10 +68,19 @@ in {
     };
     kanata = {
       enable = true;
-      keyboards.main.configFile = "/etc/nixos/x380.kbd";
+      keyboards.main.configFile = "/etc/nixos/apple.kbd";
     };
     tailscale = {
       enable = true;
+    };
+    blueman.enable = true;
+    logind.lidSwitch = "ignore";
+    tlp = {
+      enable = true;
+      settings = {
+        START_CHARGE_THRESH_BAT0 = 50;
+        STOP_CHARGE_THRESH_BAT0 = 60;
+      };
     };
   };
 
@@ -78,6 +90,8 @@ in {
       extraGroups = [
         "wheel"
         "networkmanager"
+        "audio"
+        "video"
       ];
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = sshKeys;

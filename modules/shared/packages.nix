@@ -24,4 +24,5 @@ with pkgs; [
   firefox
   newsboat
   tailscale
+  qbittorrent
 ]

@@ -16,4 +16,8 @@ shared-packages ++ [
   mpv
   mpvScripts.uosc
   telegram-desktop
+  dysk
+  brightnessctl
+  tlp
+  ddcutil
 ]
