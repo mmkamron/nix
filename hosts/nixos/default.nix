@@ -53,6 +53,7 @@ in {
     powerOnBoot = true;
     settings = {
       General = {
+        AutoEnable = true;
         Experimental = true;
       };
     };

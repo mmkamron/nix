@@ -5,7 +5,7 @@ let shared-packages = import ../shared/packages.nix { inherit pkgs; }; in
 shared-packages ++ [
   pavucontrol
   direnv
-  flameshot
+  (flameshot.override { enableWlrSupport = true; })
   alacritty
   dunst
   waybar
@@ -20,4 +20,6 @@ shared-packages ++ [
   brightnessctl
   tlp
   ddcutil
+  bluez
+  bluez-tools
 ]
